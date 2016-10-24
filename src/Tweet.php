@@ -6,6 +6,7 @@ class Tweet {
     private $userId;
     private $text;
     private $creationDate;
+    private $username;
 
     public function __construct() {
 
@@ -42,10 +43,14 @@ class Tweet {
     public function getCreationDate() {
         return $this->creationDate;
     }
+    
+    public function getUsername() {
+        return $this->username;
+    }
 
     public function saveToDB(mysqli $connection) {
         if ($this->id == -1) {
-            //insert nowegotweeta do bazy danych
+            //insert nowego tweeta do bazy danych
             $sql = "INSERT INTO Tweet(userId, text, creationDate) VALUES ('$this->userId', '$this->text', '$this->creationDate')";
             $result = $connection->query($sql);
             if ($result == true) {
@@ -69,23 +74,24 @@ class Tweet {
      * @return \User
      */
     static public function loadTweetById(mysqli $connection, $id) {
-        $sql = "SELECT * FROM Tweet WHERE id=$id order by id desc";
+        $sql = "SELECT Tweet.*, User.username FROM Tweet, User WHERE Tweet.userId = User.id AND Tweet.id=$id order by Tweet.id desc";
         $result = $connection->query($sql);
         if ($result == true && $result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            $loadedTweet = new Tweet();
-            $loadedTweet->id = $row['id'];
-            $loadedTweet->userId = $row['userId'];
-            $loadedTweet->text = $row['text'];
-            $loadedTweet->creationDate = $row['creationDate'];
-            return $loadedTweet;
+            $loadedTweetById = new Tweet();
+            $loadedTweetById->id = $row['id'];
+            $loadedTweetById->userId = $row['userId'];
+            $loadedTweetById->text = $row['text'];
+            $loadedTweetById->creationDate = $row['creationDate'];
+            $loadedTweetById->username = $row['username'];
+            return $loadedTweetById;
         }
         return null;
     }
 
     static public function loadAllTweets(mysqli $connection) {
 
-        $sql = "SELECT * FROM Tweet inner join User on Tweet.userId = User.id order by Tweet.id desc";
+        $sql = "SELECT Tweet.*, User.username FROM Tweet, User WHERE Tweet.userId = User.id order by Tweet.id desc";
         $ret = [];
         $result = $connection->query($sql);
         if ($result == true && $result->num_rows != 0) {
@@ -95,25 +101,27 @@ class Tweet {
                 $loadedTweet->userId = $row['userId'];
                 $loadedTweet->text = $row['text'];
                 $loadedTweet->creationDate = $row['creationDate'];
+                $loadedTweet->username = $row['username'];
                 $ret[] = $loadedTweet;
             }
         }
         return $ret;
     }
     
-    static public function loadAllTweetsByUserId(mysqli $connection) {
+    static public function loadAllTweetsByUserId(mysqli $connection, $userId) {
 
-        $sql = "SELECT * FROM Tweet WHERE userId=$userId order by id desc";
+        $sql = "SELECT Tweet.*, User.username FROM Tweet, User WHERE Tweet.userId = User.id AND userId=$userId order by Tweet.id desc";
         $ret = [];
         $result = $connection->query($sql);
         if ($result == true && $result->num_rows != 0) {
             foreach ($result as $row) {
-                $loadedTweet = new Tweet();
-                $loadedTweet->id = $row['id'];
-                $loadedTweet->userId = $row['userId'];
-                $loadedTweet->text = $row['text'];
-                $loadedTweet->creationDate = $row['creationDate'];
-                $ret[] = $loadedTweet;
+                $loadedTweetByUserId = new Tweet();
+                $loadedTweetByUserId->id = $row['id'];
+                $loadedTweetByUserId->userId = $row['userId'];
+                $loadedTweetByUserId->text = $row['text'];
+                $loadedTweetByUserId->creationDate = $row['creationDate'];
+                $loadedTweetByUserId->username = $row['username'];
+                $ret[] = $loadedTweetByUserId;
             }
         }
         return $ret;
