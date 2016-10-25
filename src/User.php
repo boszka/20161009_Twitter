@@ -6,6 +6,7 @@ class User {
     private $username;
     private $hashedPassword;
     private $email;
+    private $information;
 
     public function __construct() {
 
@@ -43,6 +44,14 @@ class User {
     public function getEmail() {
         return $this->email;
     }
+    
+    public function setInformation($NewInformation) {
+        $this->information = $NewInformation;
+    }
+
+    public function getInformation() {
+        return $this->information;
+    }
 
     public function saveToDB(mysqli $connection) {
         if ($this->id == -1) {
@@ -79,6 +88,7 @@ class User {
             $loadedUser->username = $row['username'];
             $loadedUser->hashedPassword = $row['hashedPassword'];
             $loadedUser->email = $row['email'];
+            $loadedUser->information = $row['information'];
             return $loadedUser;
         }
         return null;
@@ -96,6 +106,7 @@ class User {
                 $loadedUser->username = $row['username'];
                 $loadedUser->hashedPassword = $row['hashedPassword'];
                 $loadedUser->email = $row['email'];
+                $loadedUser->information = $row['information'];
                 $ret[] = $loadedUser;
             }
         }
@@ -140,6 +151,22 @@ class User {
         } else {
             return false;
         }
+    }
+
+    static public function PasswordGetId(mysqli $connection, $email, $pass) {
+
+        $query = "SELECT * FROM User WHERE email = '$email'";
+        $result = $connection->query($query);
+        if ($result == TRUE && $result->num_rows == 1) {
+
+            $row = $result->fetch_assoc();
+            $hashed_password = $row['hashedPassword'];
+            if (password_verify($pass, $hashed_password)) {
+                $id = $row['id'];
+                return $id;
+            }
+        }
+        return -1;
     }
 
 }

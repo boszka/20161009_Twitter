@@ -32,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = isset($_POST['email']) ? $conn->real_escape_string(trim($_POST['email'])) : null;
     $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+    $id = User::PasswordGetId($conn, $email, $password);
 
     if (strlen($password) > 0) {
-        if ($userId = User::logIn($conn, $email, $password)) {
-            $_SESSION['loggedUserId'] = $userId;
-            header("Location: index.php");
+        if ($id!= -1) {
+                $_SESSION['loggedUserId'] = $id; 
+                header('location: index.php');
         } else {
             echo "blad logowania<br>";
         }

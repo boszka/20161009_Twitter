@@ -43,7 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user->setEmail(trim($_POST['email']));
         $user->setPassword(trim($_POST['password1']));
         if ($user->saveToDB($conn)) {
-            echo 'witaj ' .$_POST['name'] . ' zalozyles wlasnie konto na twitterze';
+            echo 'witaj ' .$_POST['name'] . ' zalozyles wlasnie konto na twitterze ';
+            echo '<br>';
+            echo '<a href=index.php>zapraszamy na strone glowna</a>';
             
         } else {
             echo 'nie zarejestrowano uzytkownika';

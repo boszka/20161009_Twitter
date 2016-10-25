@@ -11,10 +11,11 @@ if (!isset($_SESSION['loggedUserId'])) {
         <?php
         require_once 'src/connection.php';
         require_once 'src/User.php';
+        require_once 'src/Tweet.php';
         if (isset($_SESSION['loggedUserId'])) {
 
-            $loadedUser = User::loadUserById($conn, 12);
-            //$loadedUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
+            //$loadedUser = User::loadUserById($conn, 12);
+            $loadedUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
         
         echo 'Uzytkowniku ' . $loadedUser->getUsername() . ', witamy na twitterze!';
         echo '<br>';
@@ -23,9 +24,28 @@ if (!isset($_SESSION['loggedUserId'])) {
         echo '<br>';
         echo '<a href="logout.php">wyloguj sie</a>';
         echo '<br>';
-        echo '<a href=edit.php>twoj profil</a>';
+        echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
+        echo '<br>';
+        echo '<a href=messages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
         echo '<br>';
         }
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['tweet']) && strlen($_POST['tweet']) > 0) {
+        $tweet = $_POST['tweet'];
+        $newTweet = new Tweet();
+        $newTweet->setUserId($_SESSION['loggedUserId']);
+        $newTweet->setText($tweet);
+        $newTweet->setCreationDate(date('Y-m-d H:i:s'));
+        if($newTweet->saveToDB($conn)) {
+            echo "wlasnie dodales tweeta.<br>";
+        } else {
+            echo "nie udalo sie dodac tweeta.<br>" . $conn->error;
+        }  
+    } if (strlen($_POST['tweet']) <= 0) {
+        echo 'nie mozna dodac tweeta bez tresci';
+    } 
+}   
         ?>
         <br>
         <div>
