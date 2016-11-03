@@ -10,6 +10,11 @@
             </label>
             <br>
             <label>
+                informacje u uzytkowniku:<br>
+                <input type="text" name="information">
+            </label>
+            <br>
+            <label>
                 E-mail:<br>
                 <input type="text" name="email">
             </label>
@@ -41,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = new User();
         $user->setUsername(trim($_POST['name']));
         $user->setEmail(trim($_POST['email']));
+        $user->setInformation(trim($_POST['information']));
         $user->setPassword(trim($_POST['password1']));
         if ($user->saveToDB($conn)) {
             echo 'witaj ' .$_POST['name'] . ' zalozyles wlasnie konto na twitterze ';

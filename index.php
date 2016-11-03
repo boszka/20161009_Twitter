@@ -12,6 +12,7 @@ if (!isset($_SESSION['loggedUserId'])) {
         require_once 'src/connection.php';
         require_once 'src/User.php';
         require_once 'src/Tweet.php';
+        require_once 'src/Comment.php';
         if (isset($_SESSION['loggedUserId'])) {
 
             //$loadedUser = User::loadUserById($conn, 12);
@@ -22,7 +23,7 @@ if (!isset($_SESSION['loggedUserId'])) {
 
 
         echo '<br>';
-        echo '<a href="logout.php">wyloguj sie</a>';
+        echo ''. $loadedUser->getUsername() .' <a href="logout.php">wyloguj sie</a>';
         echo '<br>';
         echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
         echo '<br>';
@@ -39,6 +40,7 @@ if (!isset($_SESSION['loggedUserId'])) {
         $newTweet->setCreationDate(date('Y-m-d H:i:s'));
         if($newTweet->saveToDB($conn)) {
             echo "wlasnie dodales tweeta.<br>";
+            header('Location: index.php');
         } else {
             echo "nie udalo sie dodac tweeta.<br>" . $conn->error;
         }  
@@ -63,19 +65,24 @@ error_reporting(-1);
 
 require_once 'src/connection.php';
 require_once 'src/Tweet.php';
-
+require_once 'src/Comment.php';
 
 $loadedTweets = Tweet::loadAllTweets($conn);
+//$loadedCommentsByTweetId = Comment::loadAllCommentsByTwId($conn, $_GET['$tweetId']);
+
 
 
 echo'<table border = 1>';
-echo '<tr><th>uzytkownik</th><th>tweet</th><th>data</th></tr>';
+echo '<tr><th>autor tweeta</th><th>tweet</th><th>data dodania tweeta</th><th>komentarze</th></tr>';
 foreach ($loadedTweets as $tweet) {
     echo '<tr>';
 
     echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
+    
     echo '<td>' . $tweet->getText() . '</td>';
     echo '<td>' . $tweet->getCreationDate() . '</td>';
+    //echo '<td>' . $tweet->getCreationDate() . '</td>';
+    echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>'. '<a\></td>';
     echo '</tr>';
 }
 echo'</table>';

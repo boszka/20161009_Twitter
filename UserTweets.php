@@ -8,6 +8,7 @@
     <body>
 
         <?php
+        session_start();
         error_reporting(-1);
 
         require_once 'src/connection.php';
@@ -16,10 +17,17 @@
 
 
         $loadedUser = User::loadUserById($conn, $_GET['userId']);
+        $activeUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
         echo '<br>';
         echo 'Wtam, jestem ' . $loadedUser->getUsername() . '!<br>';
         echo '<br>';
         echo 'Ponizej kilka slow o mnie:<br> ' . $loadedUser->getInformation() . '!<br>';
+        
+        echo '<a href="index.php">strona glowna</a>';
+        echo '<br>';
+        echo ''. $activeUser->getUsername() .' <a href="logout.php">wyloguj sie</a>';
+        echo '<br>';
+        echo '<br>';
 
 
         echo '<br>';
@@ -28,7 +36,7 @@
         $loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['userId']);
         
         echo'<table border = 1>';
-        echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>text</th><th>data</th></tr>';
+        echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>text</th><th>data</th><th>komentarze</th></tr>';
         foreach ($loadedTweetsByUserId as $tweet) {
             echo '<tr>';
             echo '<td>' . $tweet->getId() . '</td>';
@@ -36,6 +44,7 @@
             echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
             echo '<td>' . $tweet->getText() . '</td>';
             echo '<td>' . $tweet->getCreationDate() . '</td>';
+            echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>'. '<a\></td>';
             echo '</tr>';
         }
         echo'</table>';

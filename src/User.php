@@ -14,6 +14,7 @@ class User {
         $this->username = "";
         $this->email = "";
         $this->hashedPassword = "";
+        $this->information = "";
     }
 
     public function getId() {
@@ -56,13 +57,13 @@ class User {
     public function saveToDB(mysqli $connection) {
         if ($this->id == -1) {
             //insert nowego użytkownika do bazy danych
-            $sql = "INSERT INTO User(username, email, hashedPassword) VALUES ('$this->username', '$this->email', '$this->hashedPassword')";
+            $sql = "INSERT INTO User(username, email, hashedPassword, information) VALUES ('$this->username', '$this->email', '$this->hashedPassword', '$this->information')";
             $result = $connection->query($sql);
             if ($result == true) {
                 $this->id = $connection->insert_id;
                 return true;
             } else {
-                $sql = "UPDATE User SET username='$this->username', email='$this->email', hashedPassword='$this->hashedPassword' WHERE id=$this->id";
+                $sql = "UPDATE User SET username='$this->username', email='$this->email',  hashedPassword='$this->hashedPassword', information='$this->information' WHERE id=$this->id";
                 $result = $connection->query($sql);
                 if ($result == true) {
                     return true;

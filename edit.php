@@ -21,6 +21,8 @@
         echo 'Witaj ' . $activeUser->getUsername() . ' tu mozesz edytowac swoj profil';
         echo '<br>';
         echo '<br>';
+        echo ''. $activeUser->getUsername() .' <a href="logout.php">wyloguj sie</a>';
+        echo '<br>';
         
         echo '' . $activeUser->getUsername() . ' tu sa twoje tweety:';
         //$loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['loggedUserId']);
@@ -29,7 +31,7 @@
 
         
         echo'<table border = 1>';
-        echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>text</th><th>data</th></tr>';
+        echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>text</th><th>data</th><th>komentarze</th></tr>';
         foreach ($loadedTweetsByUserId as $tweet) {
             echo '<tr>';
             echo '<td>' . $tweet->getId() . '</td>';
@@ -37,6 +39,7 @@
             echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
             echo '<td>' . $tweet->getText() . '</td>';
             echo '<td>' . $tweet->getCreationDate() . '</td>';
+            echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>'. '<a\></td>';
             echo '</tr>';
         }
         echo'</table>';
