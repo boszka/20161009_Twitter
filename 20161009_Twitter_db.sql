@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 20 Lis 2016, 18:41
+-- Czas wygenerowania: 20 Lis 2016, 21:44
 -- Wersja serwera: 5.5.50-0ubuntu0.14.04.1
 -- Wersja PHP: 5.5.9-1ubuntu4.17
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `Messages` (
   PRIMARY KEY (`messageId`),
   KEY `recipientUserId` (`recipientUserId`),
   KEY `senderUserId` (`senderUserId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Zrzut danych tabeli `Messages`
@@ -147,7 +147,8 @@ INSERT INTO `Messages` (`messageId`, `creationDate`, `recipientUserId`, `senderU
 (11, '2016-11-20 17:47:03', 12, 16, 'KDHou', 1),
 (12, '2016-11-20 17:47:10', 15, 16, 'afaerwerwrvvv ', 1),
 (13, '2016-11-20 17:48:27', 17, 16, 'jhjhkjkj', 0),
-(14, '2016-11-20 17:50:20', 18, 16, 'ldjlajdlkajdlkjalkd vvste4t', 0);
+(14, '2016-11-20 17:50:20', 18, 16, 'ldjlajdlkajdlkjalkd vvste4t', 0),
+(15, '2016-11-20 21:12:02', 16, 12, 'asdfafxzvxzdfsvv', 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 --
 
 INSERT INTO `User` (`id`, `username`, `hashedPassword`, `email`, `information`) VALUES
-(1, 'usr1111111111', '$2y$10$EDpnO2ldd2GikF3gfzRpE./.3kjKxaQIoICSzwCBecHJNsYDLanEy', '111111111@gmail.com', 'lkj nnmnmnmn'),
+(1, 'ffffffff', 'sssssssssss123', 'ffff@wp.pl', 'super'),
 (2, 'usr22222222', '$2y$10$jB6vowywnk1AWtA461Die.r4BVd7VI/nNPra2g0qND1q6OBtfk.3y', '22222222222@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
 (3, 'usr333333', '$2y$10$VO9kd2o992/HZBesr/yG0u2hnoi64wbnKVNDdNrjRCt8IC7UQTYxa', '3333333333@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
 (4, 'usr4444444', '$2y$10$Re88un9F8/uvWE2PCa2I..2k.2wMbn0QU6XAlIF/I7hI9Aj9ypgpu', '444444@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
@@ -243,7 +244,7 @@ INSERT INTO `User` (`id`, `username`, `hashedPassword`, `email`, `information`) 
 (11, 'wwwwww', '$2y$10$Am9L3St6kelQKqPZThKcIOWic80CCCyXeSnRQT9UyLBvBzpsjXYbS', 'www@q.pl', 'Nullam varius fringilla dolor pulvinar imperdiet'),
 (12, 'boszka', '$2y$10$SJnctQUtpCiDIRnZ7asEV.kIvWsdqW8dyXRi3lXCPO8vYh28UK8p6', 'skolimabo@gmail.com', 'info info'),
 (14, 'jljlkklkll', '$2y$10$NC/oFpDiiy9Kkjg2WZQble7IrRxTK2sxBJL98v3tTYFoLMPn/AHI6', 'jljljjkl@lkjlkj.pl', ''),
-(15, 'stasiek', '$2y$10$bc/KBbwC63CazC1wEw/f0./ek6mHgH8MOTiuwToRC9mtBrCX9KZwO', 'stasiek_piechota@wp.pl', ''),
+(15, 'stasiek', '$2y$10$bc/KBbwC63CazC1wEw/f0./ek6mHgH8MOTiuwToRC9mtBrCX9KZwO', 'stasiek_piechota@wp.pl', 'jestem boski'),
 (16, 'roman', '$2y$10$IrZE1pbF9guAZlmX9JHguOBL80DpivPUWqw74le.gRf8kWxpAqWxu', 'roman@wp.pl', ''),
 (17, 'kasia', '$2y$10$nmCDxyrMqQWVR4fXv.QsKu99IzYonnUimHGebzD3QiOIt7atTApeq', 'kasia@wp.pl', 'jljljljllk'),
 (18, 'ania', '$2y$10$djuEPFRNBopWCoo2pbndKOcUzBGPpsV3SpfVO/kLihX2lebr2Ekq6', 'ania@wp.pl', ';mksovjdoij josjfosjifoisjvvvmmv');
