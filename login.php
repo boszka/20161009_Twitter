@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['loggedUserId'] = $id; 
                 header('location: index.php');
         } else {
-            echo "blad logowania<br>";
+            echo "<br>niepoprawna nazwa uzytkownika lub haslo. blad logowania<br>";
         }
     }
 

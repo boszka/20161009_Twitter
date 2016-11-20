@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedUserId'])) {
         echo '<br>';
         echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
         echo '<br>';
-        echo '<a href=messages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
+        echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
         echo '<br>';
         echo '<a href="index.php">strona glowna</a>';
         echo '<br>';

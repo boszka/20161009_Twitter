@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 04 Lis 2016, 00:07
+-- Czas wygenerowania: 20 Lis 2016, 18:41
 -- Wersja serwera: 5.5.50-0ubuntu0.14.04.1
 -- Wersja PHP: 5.5.9-1ubuntu4.17
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `tweetId` (`tweetId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=71 ;
 
 --
 -- Zrzut danych tabeli `Comment`
@@ -64,9 +64,7 @@ INSERT INTO `Comment` (`id`, `text`, `creationDate`, `userId`, `tweetId`) VALUES
 (20, 'twÃ³j komentarz', '2016-11-03 22:49:21', 15, 9),
 (21, 'twÃ³j komentarz   gfdsgfd', '2016-11-03 22:50:55', 15, 9),
 (22, 'twÃ³j komentarz  ', '2016-11-03 22:53:10', 15, 24),
-(23, '', '2016-11-03 22:53:16', 15, 24),
 (24, 'twÃ³j komentarz', '2016-11-03 22:54:07', 15, 16),
-(25, '', '2016-11-03 22:54:12', 15, 16),
 (26, 'twÃ³j komentarz', '2016-11-03 22:54:42', 15, 16),
 (27, 'twÃ³j komentarz', '2016-11-03 22:54:44', 15, 16),
 (28, 'twÃ³j komentarzvvvv', '2016-11-03 22:54:48', 15, 16),
@@ -95,7 +93,61 @@ INSERT INTO `Comment` (`id`, `text`, `creationDate`, `userId`, `tweetId`) VALUES
 (51, 'kkkkkkk', '2016-11-03 23:17:46', 16, 8),
 (52, 'kkkkkkk', '2016-11-03 23:18:06', 16, 8),
 (53, 'to wspaniale', '2016-11-03 23:31:54', 17, 38),
-(54, 'asdasdadsas', '2016-11-03 23:38:54', 17, 30);
+(54, 'asdasdadsas', '2016-11-03 23:38:54', 17, 30),
+(55, 'twÃ³j komentarz', '2016-11-04 00:12:43', 17, 15),
+(56, 'twÃ³j komentarz', '2016-11-04 00:12:44', 17, 15),
+(57, 'twÃ³j komentarz', '2016-11-04 00:12:46', 17, 15),
+(58, 'twÃ³j komentarz', '2016-11-04 00:30:32', 17, 15),
+(59, 'twÃ³j komentarz', '2016-11-04 00:50:26', 17, 15),
+(60, 'twÃ³j komentarz', '2016-11-04 00:51:28', 17, 15),
+(61, 'asdfafsaer', '2016-11-04 00:53:56', 17, 39),
+(62, 'twÃ³j komentarz jljlkjlkj', '2016-11-09 16:20:37', 17, 39),
+(63, 'twÃ³j komentarz do 111', '2016-11-20 11:14:26', 15, 40),
+(64, 'twÃ³j komentarz do 2222', '2016-11-20 11:14:41', 15, 41),
+(65, 'twÃ³j komentarz', '2016-11-20 15:31:59', 15, 33),
+(66, 'twÃ³j komentarz 6666666666667777777', '2016-11-20 15:32:42', 15, 33),
+(67, 'twÃ³j komentarz 6666666666667777777', '2016-11-20 15:36:34', 15, 33),
+(68, 'twÃ³j komentarz 6666666666667777777', '2016-11-20 15:37:05', 15, 33),
+(69, 'twÃ³j komentarz', '2016-11-20 15:57:09', 15, 37),
+(70, 'twÃ³j komentarz', '2016-11-20 16:22:57', 17, 37);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `Messages`
+--
+
+CREATE TABLE IF NOT EXISTS `Messages` (
+  `messageId` int(11) NOT NULL AUTO_INCREMENT,
+  `creationDate` datetime NOT NULL,
+  `recipientUserId` int(11) NOT NULL,
+  `senderUserId` int(11) NOT NULL,
+  `text` text,
+  `isRead` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`messageId`),
+  KEY `recipientUserId` (`recipientUserId`),
+  KEY `senderUserId` (`senderUserId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Zrzut danych tabeli `Messages`
+--
+
+INSERT INTO `Messages` (`messageId`, `creationDate`, `recipientUserId`, `senderUserId`, `text`, `isRead`) VALUES
+(1, '2016-11-11 00:00:00', 15, 10, 'zxvzzxv', 1),
+(2, '2016-11-12 00:00:00', 1, 15, 'DGFDGDGBB VRRRRR ', 0),
+(3, '2016-11-02 00:00:00', 17, 1, 'fasfaf sfesfsf', 0),
+(4, '2016-11-15 00:00:00', 15, 17, 'asdadasdASD', 0),
+(5, '2016-11-20 17:38:34', 15, 12, 'afwewbtwegt ', 0),
+(6, '2016-11-20 17:39:45', 12, 15, 'afwewbtwegt  sfgwrvgwtw346w465', 1),
+(7, '2016-11-20 17:41:01', 18, 12, 'wspaniale jjapfjwepf  oajfiosjfw    ', 0),
+(8, '2016-11-20 17:42:21', 16, 12, 'qwwffv  dgegrergertew sgsfsfsdfsdf    ', 0),
+(9, '2016-11-20 17:42:43', 16, 12, 'lolololololooloegryx', 0),
+(10, '2016-11-20 17:45:59', 12, 17, 'lafjo jiwoeijwioefvne0eotijeoi', 1),
+(11, '2016-11-20 17:47:03', 12, 16, 'KDHou', 1),
+(12, '2016-11-20 17:47:10', 15, 16, 'afaerwerwrvvv ', 1),
+(13, '2016-11-20 17:48:27', 17, 16, 'jhjhkjkj', 0),
+(14, '2016-11-20 17:50:20', 18, 16, 'ldjlajdlkajdlkjalkd vvste4t', 0);
 
 -- --------------------------------------------------------
 
@@ -110,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `Tweet` (
   `creationDate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
 -- Zrzut danych tabeli `Tweet`
@@ -150,7 +202,12 @@ INSERT INTO `Tweet` (`id`, `userId`, `text`, `creationDate`) VALUES
 (36, 16, 'wpisz tresc tweeta', '2016-11-03 23:05:18'),
 (37, 16, 'wpisz tresc tweeta', '2016-11-03 23:05:19'),
 (38, 17, 'jestem nowa!!!', '2016-11-03 23:31:30'),
-(39, 17, 'wpisz tresc tweeta', '2016-11-03 23:55:04');
+(39, 17, 'wpisz tresc tweeta', '2016-11-03 23:55:04'),
+(40, 18, '111111', '2016-11-20 11:03:20'),
+(41, 18, '2222222', '2016-11-20 11:13:57'),
+(42, 15, 'ffgihgou  hyugou', '2016-11-20 15:57:24'),
+(43, 15, 'ljhll ', '2016-11-20 18:04:24'),
+(44, 15, 'xbxfgs', '2016-11-20 18:39:52');
 
 -- --------------------------------------------------------
 
@@ -166,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `information` varchar(225) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Zrzut danych tabeli `User`
@@ -188,11 +245,25 @@ INSERT INTO `User` (`id`, `username`, `hashedPassword`, `email`, `information`) 
 (14, 'jljlkklkll', '$2y$10$NC/oFpDiiy9Kkjg2WZQble7IrRxTK2sxBJL98v3tTYFoLMPn/AHI6', 'jljljjkl@lkjlkj.pl', ''),
 (15, 'stasiek', '$2y$10$bc/KBbwC63CazC1wEw/f0./ek6mHgH8MOTiuwToRC9mtBrCX9KZwO', 'stasiek_piechota@wp.pl', ''),
 (16, 'roman', '$2y$10$IrZE1pbF9guAZlmX9JHguOBL80DpivPUWqw74le.gRf8kWxpAqWxu', 'roman@wp.pl', ''),
-(17, 'kasia', '$2y$10$nmCDxyrMqQWVR4fXv.QsKu99IzYonnUimHGebzD3QiOIt7atTApeq', 'kasia@wp.pl', 'jljljljllk');
+(17, 'kasia', '$2y$10$nmCDxyrMqQWVR4fXv.QsKu99IzYonnUimHGebzD3QiOIt7atTApeq', 'kasia@wp.pl', 'jljljljllk'),
+(18, 'ania', '$2y$10$djuEPFRNBopWCoo2pbndKOcUzBGPpsV3SpfVO/kLihX2lebr2Ekq6', 'ania@wp.pl', ';mksovjdoij josjfosjifoisjvvvmmv');
 
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `Comment`
+--
+ALTER TABLE `Comment`
+  ADD CONSTRAINT `fkey2` FOREIGN KEY (`tweetId`) REFERENCES `Tweet` (`id`) ON DELETE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `Messages`
+--
+ALTER TABLE `Messages`
+  ADD CONSTRAINT `Messages_ibfk_1` FOREIGN KEY (`senderUserId`) REFERENCES `User` (`id`),
+  ADD CONSTRAINT `Messages_ibfk_2` FOREIGN KEY (`recipientUserId`) REFERENCES `User` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `Tweet`

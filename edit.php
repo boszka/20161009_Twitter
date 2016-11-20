@@ -14,17 +14,21 @@
         require_once 'src/connection.php';
         require_once 'src/Tweet.php';
         require_once 'src/User.php';
+        require_once 'src/Messages.php';
 
 
         //$activeUser = User::loadUserById($conn, $_GET['loggedUserId']);  
         $activeUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
-        echo 'Witaj ' . $activeUser->getUsername() . ' tu mozesz edytowac swoj profil';
+        echo 'Witaj <b>' . $activeUser->getUsername() . ' </b>tu mozesz edytowac swoj profil';
         echo '<br>';
         echo '<br>';
-        echo ''. $activeUser->getUsername() .' <a href="logout.php">wyloguj sie</a>';
+        echo '<b>'. $activeUser->getUsername() .'</b> <a href="logout.php">wyloguj sie</a>';
         echo '<br>';
-        
-        echo '' . $activeUser->getUsername() . ' tu sa twoje tweety:';
+        echo '<a href="index.php">strona glowna</a>';
+        echo '<br>';
+        echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
+        echo '<br>';
+        echo '<b>' . $activeUser->getUsername() . '</b> tu sa twoje tweety:';
         //$loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['loggedUserId']);
         $loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_SESSION['loggedUserId']);
 
