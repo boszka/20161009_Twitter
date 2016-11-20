@@ -7,6 +7,8 @@
     </head>
     <body>
 
+
+
         <?php
         session_start();
         error_reporting(-1);
@@ -17,23 +19,64 @@
         require_once 'src/Messages.php';
 
 
-        //$activeUser = User::loadUserById($conn, $_GET['loggedUserId']);  
-        $activeUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
-        echo 'Witaj <b>' . $activeUser->getUsername() . ' </b>tu mozesz edytowac swoj profil';
+
+        $activeuser = User::loadUserById($conn, $_SESSION['loggedUserId']);
+
+
+        echo 'Witaj <b>' . $activeuser->getUsername() . ' </b>tu mozesz edytowac swoj profil';
         echo '<br>';
         echo '<br>';
-        echo '<b>'. $activeUser->getUsername() .'</b> <a href="logout.php">wyloguj sie</a>';
+        echo 'Informacje o Tobie:<br> ' . $activeuser->getInformation() . '!<br>';
+        echo '<br>';
+
+        echo '<br>';
+        echo '<b>' . $activeuser->getUsername() . '</b> <a href="logout.php">wyloguj sie</a>';
         echo '<br>';
         echo '<a href="index.php">strona glowna</a>';
         echo '<br>';
         echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
         echo '<br>';
-        echo '<b>' . $activeUser->getUsername() . '</b> tu sa twoje tweety:';
+        echo '<br>';
+
+
+
+
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $updatedUserById = User::loadUserById($conn, $_SESSION['loggedUserId']);
+            switch ($_POST['submit']) {
+         case 'password':
+            $wszystko_OK = true;
+            if (isset($_POST['password1']) && isset($_POST['password2'])) {
+                $password1 = $_POST['password1'];
+                $password2 = $_POST['password2'];
+                if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
+                    $updatedUserById->setPassword($password1);
+                } else if (strlen($password1) < 6 || strlen($password1) > 16) {
+                    $_SESSION['e_password'] = "hasło musi posiadać od 6 do 16 znaków";
+                    $wszystko_OK = false;
+                } else {
+                    $_SESSION['e_password'] = "hasła różnią się";
+                    $wszystko_OK = false;
+                }
+            }
+            if ($wszystko_OK == true) {
+                $updatedUserById->saveToDB($conn);
+                $_SESSION['new_password'] = 'hasło zostało zmienione';
+            }
+            break;
+            }
+        }
+
+
+
+        echo '<b>' . $activeuser->getUsername() . '</b> tu sa twoje tweety:';
         //$loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['loggedUserId']);
         $loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_SESSION['loggedUserId']);
 
 
-        
+
         echo'<table border = 1>';
         echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>text</th><th>data</th><th>komentarze</th></tr>';
         foreach ($loadedTweetsByUserId as $tweet) {
@@ -43,10 +86,30 @@
             echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
             echo '<td>' . $tweet->getText() . '</td>';
             echo '<td>' . $tweet->getCreationDate() . '</td>';
-            echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>'. '<a\></td>';
+            echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>' . '<a\></td>';
             echo '</tr>';
         }
         echo'</table>';
         ?>
+
+        <form method="POST" action="edit.php">
+
+            Podaj nowe hasło: <br> <input type="password" name="password1"><br>
+            Powtórz nowe hasło: <br> <input type="password" name="password2"><br>
+            <button type="submit" name="submit" value="password">Zapisz zmiany</button>
+
+            <?php
+            if (isset($_SESSION['e_password'])) {
+                echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
+                unset($_SESSION['e_password']);
+            }
+            if (isset($_SESSION['new_password'])) {
+                echo '<div class="info">' . $_SESSION['new_password'] . '</div>';
+                unset($_SESSION['new_password']);
+            }
+            ?>
+
+        </form>
+
     </body>
 </html>
