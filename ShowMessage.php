@@ -24,7 +24,7 @@
 
         $activeUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
         //$loadedUser = User::loadUserById($conn, $_GET['messageId']);
-        
+
 
 
         if (isset($_SESSION['messageId'])) {
@@ -45,7 +45,7 @@
                 echo '<td>' . trim($loadMessage->getRecipientUserName()) . '</td>';
                 echo '<td>' . trim($loadMessage->getCreationDate()) . '</td>';
                 echo '<td>' . $loadMessage->getText() . '</td>';
-                
+
                 echo'</table>';
 
                 if (!$loadMessage->getIsRead() && $loadMessage->getRecipientUserId() == $_SESSION['loggedUserId']) {

@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = User::PasswordGetId($conn, $email, $password);
 
     if (strlen($password) > 0) {
-        if ($id!= -1) {
-                $_SESSION['loggedUserId'] = $id; 
-                header('location: index.php');
+        if ($id != -1) {
+            $_SESSION['loggedUserId'] = $id;
+            header('location: index.php');
         } else {
             echo "<br>niepoprawna nazwa uzytkownika lub haslo. blad logowania<br>";
         }

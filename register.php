@@ -51,22 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo '<br>';
         } else {
             $user = new User();
-        $user->setUsername(trim($_POST['name']));
-        $user->setEmail(trim($_POST['email']));
-        $user->setInformation(trim($_POST['information']));
-        $user->setPassword(trim($_POST['password1']));
-        if ($user->saveToDB($conn)) {
-            echo '<br>';
-            echo 'witaj ' . $_POST['name'] . ' zalozyles wlasnie konto na twitterze ';
-            echo '<br>';
-            echo '<a href=index.php>zapraszamy na strone glowna</a>';
-        } else {
-            echo 'nie zarejestrowano uzytkownika';
+            $user->setUsername(trim($_POST['name']));
+            $user->setEmail(trim($_POST['email']));
+            $user->setInformation(trim($_POST['information']));
+            $user->setPassword(trim($_POST['password1']));
+            if ($user->saveToDB($conn)) {
+                echo '<br>';
+                echo 'witaj ' . $_POST['name'] . ' zalozyles wlasnie konto na twitterze ';
+                echo '<br>';
+                echo '<a href=index.php>zapraszamy na strone glowna</a>';
+            } else {
+                echo 'nie zarejestrowano uzytkownika';
+            }
         }
-        }  
-
-        
-        
     } else {
         echo 'nie podano wszystkich danych w formularzu, haslo ma mniej niz 8 znakow badz hasla roznia sie';
     }

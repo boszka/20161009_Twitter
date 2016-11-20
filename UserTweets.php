@@ -20,7 +20,7 @@
         $loadedUser = User::loadUserById($conn, $_GET['userId']);
         $activeUser = User::loadUserById($conn, $_SESSION['loggedUserId']);
 
-        
+
 
         echo '<br>';
         echo 'Witam, jestem <b>' . $loadedUser->getUsername() . '</b>!<br>';
@@ -33,10 +33,10 @@
         echo '<br>';
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['userId'])) {
-        $_SESSION['receiverID'] = $_GET['userId'];
-    }
-}
+            if (isset($_GET['userId'])) {
+                $_SESSION['receiverID'] = $_GET['userId'];
+            }
+        }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['message']) && strlen(trim($_POST['message'])) > 0 &&
@@ -64,34 +64,34 @@
             <textarea name="message" cols="40" rows="4" placeholder="WPISZ TREŚĆ WIADOMOŚCI"></textarea><br>
             <input type="submit" name="submit" value="WYŚLIJ WIADOMOŚĆ"/><br><br>
         </form>
-<?php
-echo '<a href="index.php">strona glowna</a>';
-echo '<br>';
-echo '' . $activeUser->getUsername() . ' <a href="logout.php">wyloguj sie</a>';
-echo '<br>';
-echo '<br>';
+        <?php
+        echo '<a href="index.php">strona glowna</a>';
+        echo '<br>';
+        echo '' . $activeUser->getUsername() . ' <a href="logout.php">wyloguj sie</a>';
+        echo '<br>';
+        echo '<br>';
 
 
-echo '<br>';
-echo 'A to moje tweety:';
-echo '<br>';
-$loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['userId']);
+        echo '<br>';
+        echo 'A to moje tweety:';
+        echo '<br>';
+        $loadedTweetsByUserId = Tweet::loadAllTweetsByUserId($conn, $_GET['userId']);
 
-echo'<table border = 1>';
-echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>treść</th><th>data</th><th>komentarze</th></tr>';
-foreach ($loadedTweetsByUserId as $tweet) {
-    echo '<tr>';
-    echo '<td>' . $tweet->getId() . '</td>';
-    echo '<td>' . $tweet->getUserId() . '</td>';
-    echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
-    echo '<td>' . $tweet->getText() . '</td>';
-    echo '<td>' . $tweet->getCreationDate() . '</td>';
-    echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>' . '<a\></td>';
-    echo '</tr>';
-}
-echo'</table>';
-echo '<br>';
-?>
+        echo'<table border = 1>';
+        echo '<tr><th>Id tweeta</th><th>Id uzytkownika</th><th>uzytkownik</th><th>treść</th><th>data</th><th>komentarze</th></tr>';
+        foreach ($loadedTweetsByUserId as $tweet) {
+            echo '<tr>';
+            echo '<td>' . $tweet->getId() . '</td>';
+            echo '<td>' . $tweet->getUserId() . '</td>';
+            echo '<td><a href=UserTweets.php?userId=' . $tweet->getUserId() . '>' . $tweet->getUsername() . '</a></td>';
+            echo '<td>' . $tweet->getText() . '</td>';
+            echo '<td>' . $tweet->getCreationDate() . '</td>';
+            echo '<td><a href=Comments.php?tweetId=' . $tweet->getId() . '>' . '>>>>' . '<a\></td>';
+            echo '</tr>';
+        }
+        echo'</table>';
+        echo '<br>';
+        ?>
 
     </body>
 </html>
