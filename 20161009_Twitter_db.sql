@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 20 Lis 2016, 21:44
+-- Czas wygenerowania: 22 Lis 2016, 22:32
 -- Wersja serwera: 5.5.50-0ubuntu0.14.04.1
 -- Wersja PHP: 5.5.9-1ubuntu4.17
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `Messages` (
   PRIMARY KEY (`messageId`),
   KEY `recipientUserId` (`recipientUserId`),
   KEY `senderUserId` (`senderUserId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Zrzut danych tabeli `Messages`
@@ -148,7 +148,8 @@ INSERT INTO `Messages` (`messageId`, `creationDate`, `recipientUserId`, `senderU
 (12, '2016-11-20 17:47:10', 15, 16, 'afaerwerwrvvv ', 1),
 (13, '2016-11-20 17:48:27', 17, 16, 'jhjhkjkj', 0),
 (14, '2016-11-20 17:50:20', 18, 16, 'ldjlajdlkajdlkjalkd vvste4t', 0),
-(15, '2016-11-20 21:12:02', 16, 12, 'asdfafxzvxzdfsvv', 0);
+(15, '2016-11-20 21:12:02', 16, 12, 'asdfafxzvxzdfsvv', 0),
+(16, '2016-11-22 22:25:30', 17, 18, ';kl;k;lk;l', 0);
 
 -- --------------------------------------------------------
 
@@ -163,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `Tweet` (
   `creationDate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
 
 --
 -- Zrzut danych tabeli `Tweet`
@@ -208,7 +209,8 @@ INSERT INTO `Tweet` (`id`, `userId`, `text`, `creationDate`) VALUES
 (41, 18, '2222222', '2016-11-20 11:13:57'),
 (42, 15, 'ffgihgou  hyugou', '2016-11-20 15:57:24'),
 (43, 15, 'ljhll ', '2016-11-20 18:04:24'),
-(44, 15, 'xbxfgs', '2016-11-20 18:39:52');
+(44, 15, 'xbxfgs', '2016-11-20 18:39:52'),
+(45, 15, 'cze&#347;&#263; jestem stasiek \r\n(:', '2016-11-20 21:55:29');
 
 -- --------------------------------------------------------
 
@@ -224,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `information` varchar(225) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Zrzut danych tabeli `User`
@@ -242,12 +244,13 @@ INSERT INTO `User` (`id`, `username`, `hashedPassword`, `email`, `information`) 
 (9, 'Roman', '$2y$10$d1rCW3.Ulgz0AYKdz5hxCeIqwGJdgWmO1yE8k9Mc7LOrFCZx7S/yu', '234@dd.c', 'Strona ma pobierać email i hasło.'),
 (10, 'wwwww', '$2y$10$YqHWjbWSWqGLd2vT.esugud4bsBDuIoxYQY4hj.Awle9Bh9h5wnQu', 'qq@w.w', 'Strona ma pobierać email i hasło.'),
 (11, 'wwwwww', '$2y$10$Am9L3St6kelQKqPZThKcIOWic80CCCyXeSnRQT9UyLBvBzpsjXYbS', 'www@q.pl', 'Nullam varius fringilla dolor pulvinar imperdiet'),
-(12, 'boszka', '$2y$10$SJnctQUtpCiDIRnZ7asEV.kIvWsdqW8dyXRi3lXCPO8vYh28UK8p6', 'skolimabo@gmail.com', 'info info'),
+(12, 'boszka', '$2y$10$mQXQcVcu8BdOCshFdHv02.ni7E4JcK96K7O8W6gAH3ERn51Hqn2Y.', 'skolimabo@gmail.com', 'info info'),
 (14, 'jljlkklkll', '$2y$10$NC/oFpDiiy9Kkjg2WZQble7IrRxTK2sxBJL98v3tTYFoLMPn/AHI6', 'jljljjkl@lkjlkj.pl', ''),
 (15, 'stasiek', '$2y$10$bc/KBbwC63CazC1wEw/f0./ek6mHgH8MOTiuwToRC9mtBrCX9KZwO', 'stasiek_piechota@wp.pl', 'jestem boski'),
 (16, 'roman', '$2y$10$IrZE1pbF9guAZlmX9JHguOBL80DpivPUWqw74le.gRf8kWxpAqWxu', 'roman@wp.pl', ''),
 (17, 'kasia', '$2y$10$nmCDxyrMqQWVR4fXv.QsKu99IzYonnUimHGebzD3QiOIt7atTApeq', 'kasia@wp.pl', 'jljljljllk'),
-(18, 'ania', '$2y$10$djuEPFRNBopWCoo2pbndKOcUzBGPpsV3SpfVO/kLihX2lebr2Ekq6', 'ania@wp.pl', ';mksovjdoij josjfosjifoisjvvvmmv');
+(18, 'ania', '$2y$10$c2qAES6vuC.DMyelZlrgwOGsER4dciIygoD22L3reHY0u54eOh0au', 'ania@wp.pl', ';mksovjdoij josjfosjifoisjvvvmmv'),
+(19, 'joanna', '$2y$10$YRHaYgcfrqrgbMyQ.Lq.BuHbiIbA1bypZa2W.33ZLlBMMZ/oCGG0q', 'joanna@wp.pl', 'aflafipo');
 
 --
 -- Ograniczenia dla zrzutów tabel
