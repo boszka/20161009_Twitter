@@ -43,7 +43,7 @@ class Tweet {
     public function getCreationDate() {
         return $this->creationDate;
     }
-    
+
     public function getUsername() {
         return $this->username;
     }
@@ -56,15 +56,15 @@ class Tweet {
             if ($result == true) {
                 $this->id = $connection->insert_id;
                 return true;
-            } else {
-                $sql = "UPDATE Tweet SET userId='$this->userId', text='$this->text', creationDate='$this->creationDate' WHERE id=$this->id";
-                $result = $connection->query($sql);
-                if ($result == true) {
-                    return true;
-                }
             }
-            return false;
+        } else {
+            $sql = "UPDATE Tweet SET userId='$this->userId', text='$this->text', creationDate='$this->creationDate' WHERE id=$this->id";
+            $result = $connection->query($sql);
+            if ($result == true) {
+                return true;
+            }
         }
+        return false;
     }
 
     /**
@@ -107,7 +107,7 @@ class Tweet {
         }
         return $ret;
     }
-    
+
     static public function loadAllTweetsByUserId(mysqli $connection, $userId) {
 
         $sql = "SELECT Tweet.*, User.username FROM Tweet, User WHERE Tweet.userId = User.id AND userId=$userId order by Tweet.id desc";
@@ -126,6 +126,5 @@ class Tweet {
         }
         return $ret;
     }
-    
 
 }

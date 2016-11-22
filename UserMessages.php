@@ -9,7 +9,7 @@
 
         <?php
         session_start();
-        error_reporting(-1);
+       
 
         require_once 'src/connection.php';
         require_once 'src/Tweet.php';
@@ -27,12 +27,12 @@
 
 
             echo '<br>';
-            echo '<b>' . $activeUser->getUsername() . '</b> <a href="logout.php">wyloguj sie</a>';
+            echo '<b>' . $activeUser->getUsername() . '</b> <a href="Logout.php">wyloguj sie</a>';
 
             echo '<br>';
             echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
             echo '<br>';
-            echo '<a href="index.php">strona glowna</a>';
+            echo '<a href="Index.php">strona glowna</a>';
             echo '<br>';
         }
 

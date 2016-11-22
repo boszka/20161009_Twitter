@@ -45,7 +45,7 @@ class User {
     public function getEmail() {
         return $this->email;
     }
-    
+
     public function setInformation($NewInformation) {
         $this->information = $NewInformation;
     }
@@ -62,15 +62,15 @@ class User {
             if ($result == true) {
                 $this->id = $connection->insert_id;
                 return true;
-            } else {
-                $sql = "UPDATE User SET username='$this->username', email='$this->email',  hashedPassword='$this->hashedPassword', information='$this->information' WHERE id=$this->id";
-                $result = $connection->query($sql);
-                if ($result == true) {
-                    return true;
-                }
             }
-            return false;
+        } else {
+            $sql = "UPDATE User SET username='$this->username', email='$this->email',  hashedPassword='$this->hashedPassword', information='$this->information' WHERE id=$this->id";
+            $result = $connection->query($sql);
+            if ($result == true) {
+                return true;
+            }
         }
+        return false;
     }
 
     /**

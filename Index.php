@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedUserId'])) {
-    header('Location: login.php');
+    header('Location: Login.php');
 }
 ?>
 
@@ -23,9 +23,9 @@ if (!isset($_SESSION['loggedUserId'])) {
             echo 'Uzytkowniku <b>' . $loadedUser->getUsername() . '</b>, witamy na twitterze!';
             echo '<br>';
             echo '<br>';
-            echo '<b>' . $loadedUser->getUsername() . '</b> <a href="logout.php">wyloguj sie</a>';
+            echo '<b>' . $loadedUser->getUsername() . '</b> <a href="Logout.php">wyloguj sie</a>';
             echo '<br>';
-            echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
+            echo '<a href=Edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
             echo '<br>';
             echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
             echo '<br>';
@@ -40,7 +40,7 @@ if (!isset($_SESSION['loggedUserId'])) {
                 $newTweet->setCreationDate(date('Y-m-d H:i:s'));
                 if ($newTweet->saveToDB($conn)) {
                     echo "wlasnie dodales tweeta.<br>";
-                    header('Location: index.php');
+                    header('Location: Index.php');
                 } else {
                     echo "nie udalo sie dodac tweeta.<br>" . $conn->error;
                 }
@@ -51,7 +51,7 @@ if (!isset($_SESSION['loggedUserId'])) {
         ?>
         <br>
         <div>
-            <form method="post" action="index.php">
+            <form method="post" action="Index.php">
                 <textarea name="tweet" cols="50" rows="4" placeholder="wpisz tresc tweeta"></textarea><br>
                 <button type="submit" name="submit" value="new_tweet">dodaj tweeta</button><br><br>
             </form>
@@ -61,7 +61,7 @@ if (!isset($_SESSION['loggedUserId'])) {
 </html>
 
 <?php
-error_reporting(-1);
+
 
 require_once 'src/connection.php';
 require_once 'src/User.php';

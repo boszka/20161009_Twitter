@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo '<br>';
                 echo 'witaj ' . $_POST['name'] . ' zalozyles wlasnie konto na twitterze ';
                 echo '<br>';
-                echo '<a href=index.php>zapraszamy na strone glowna</a>';
+                echo '<a href=Index.php>zapraszamy na strone glowna</a>';
             } else {
                 echo 'nie zarejestrowano uzytkownika';
             }

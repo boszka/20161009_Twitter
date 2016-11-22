@@ -9,7 +9,7 @@
 
         <?php
         session_start();
-        error_reporting(-1);
+        
 
         require_once 'src/connection.php';
         require_once 'src/Tweet.php';
@@ -65,9 +65,9 @@
             <input type="submit" name="submit" value="WYŚLIJ WIADOMOŚĆ"/><br><br>
         </form>
         <?php
-        echo '<a href="index.php">strona glowna</a>';
+        echo '<a href="Index.php">strona glowna</a>';
         echo '<br>';
-        echo '' . $activeUser->getUsername() . ' <a href="logout.php">wyloguj sie</a>';
+        echo '' . $activeUser->getUsername() . ' <a href="Logout.php">wyloguj sie</a>';
         echo '<br>';
         echo '<br>';
 

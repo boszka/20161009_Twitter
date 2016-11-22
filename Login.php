@@ -20,7 +20,7 @@
             <input type="submit" value="zaloguj">
         </form>
         <br>
-        jezeli nie posiadasz konta, zapraszamy do <a href="register.php">rejestracji</a>
+        jezeli nie posiadasz konta, zapraszamy do <a href="Register.php">rejestracji</a>
     </body>
 </html>
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (strlen($password) > 0) {
         if ($id != -1) {
             $_SESSION['loggedUserId'] = $id;
-            header('location: index.php');
+            header('location: Index.php');
         } else {
             echo "<br>niepoprawna nazwa uzytkownika lub haslo. blad logowania<br>";
         }

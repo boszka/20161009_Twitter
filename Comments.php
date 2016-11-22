@@ -20,13 +20,13 @@
 
             echo 'Uzytkowniku ' . $loadedUser->getUsername() . ', tutaj możesz dodać komentarz do tweeta!';
             echo '<br>';
-            echo '' . $loadedUser->getUsername() . ' <a href="logout.php">wyloguj sie</a>';
+            echo '' . $loadedUser->getUsername() . ' <a href="Logout.php">wyloguj sie</a>';
             echo '<br>';
             echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
             echo '<br>';
             echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
             echo '<br>';
-            echo '<a href="index.php">strona glowna</a>';
+            echo '<a href="Index.php">strona glowna</a>';
             echo '<br>';
             echo '<br>';
         }

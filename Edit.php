@@ -11,7 +11,7 @@
 
         <?php
         session_start();
-        error_reporting(-1);
+
 
         require_once 'src/connection.php';
         require_once 'src/Tweet.php';
@@ -30,9 +30,9 @@
         echo '<br>';
 
         echo '<br>';
-        echo '<b>' . $activeuser->getUsername() . '</b> <a href="logout.php">wyloguj sie</a>';
+        echo '<b>' . $activeuser->getUsername() . '</b> <a href="Logout.php">wyloguj sie</a>';
         echo '<br>';
-        echo '<a href="index.php">strona glowna</a>';
+        echo '<a href="Index.php">strona glowna</a>';
         echo '<br>';
         echo '<a href=UserMessages.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoje wiadomosci</a>';
         echo '<br>';
@@ -46,26 +46,26 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updatedUserById = User::loadUserById($conn, $_SESSION['loggedUserId']);
             switch ($_POST['submit']) {
-         case 'password':
-            $wszystko_OK = true;
-            if (isset($_POST['password1']) && isset($_POST['password2'])) {
-                $password1 = $_POST['password1'];
-                $password2 = $_POST['password2'];
-                if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
-                    $updatedUserById->setPassword($password1);
-                } else if (strlen($password1) < 6 || strlen($password1) > 16) {
-                    $_SESSION['e_password'] = "hasło musi posiadać od 6 do 16 znaków";
-                    $wszystko_OK = false;
-                } else {
-                    $_SESSION['e_password'] = "hasła różnią się";
-                    $wszystko_OK = false;
-                }
-            }
-            if ($wszystko_OK == true) {
-                $updatedUserById->saveToDB($conn);
-                $_SESSION['new_password'] = 'hasło zostało zmienione';
-            }
-            break;
+                case 'password':
+                    $wszystko_OK = true;
+                    if (isset($_POST['password1']) && isset($_POST['password2'])) {
+                        $password1 = $_POST['password1'];
+                        $password2 = $_POST['password2'];
+                        if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
+                            $updatedUserById->setPassword($password1);
+                        } else if (strlen($password1) < 6 || strlen($password1) > 16) {
+                            $_SESSION['e_password'] = "hasło musi posiadać od 6 do 16 znaków";
+                            $wszystko_OK = false;
+                        } else {
+                            $_SESSION['e_password'] = "hasła różnią się";
+                            $wszystko_OK = false;
+                        }
+                    }
+                    if ($wszystko_OK == true) {
+                        $updatedUserById->saveToDB($conn);
+                        $_SESSION['new_password'] = 'hasło zostało zmienione';
+                    }
+                    break;
             }
         }
 
@@ -92,7 +92,7 @@
         echo'</table>';
         ?>
 
-        <form method="POST" action="edit.php">
+        <form method="POST" action="Edit.php">
 
             Podaj nowe hasło: <br> <input type="password" name="password1"><br>
             Powtórz nowe hasło: <br> <input type="password" name="password2"><br>
@@ -100,11 +100,11 @@
 
             <?php
             if (isset($_SESSION['e_password'])) {
-                echo '<div class="error">' . $_SESSION['e_password'] . '</div>';
+                echo '<div>' . $_SESSION['e_password'] . '</div>';
                 unset($_SESSION['e_password']);
             }
             if (isset($_SESSION['new_password'])) {
-                echo '<div class="info">' . $_SESSION['new_password'] . '</div>';
+                echo '<div>' . $_SESSION['new_password'] . '</div>';
                 unset($_SESSION['new_password']);
             }
             ?>

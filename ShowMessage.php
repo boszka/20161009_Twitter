@@ -9,7 +9,7 @@
 
         <?php
         session_start();
-        error_reporting(-1);
+       
 
         if (isset($_GET['id']) && is_numeric($_GET['id']) == true) {
             $_SESSION['messageId'] = (int) $_GET['id'];
@@ -65,12 +65,12 @@
             echo '<a href=UserMessages.php>wróć do wiadomosci</a>';
 
             echo '<br>';
-            echo ' <a href="logout.php">wyloguj sie</a>';
+            echo ' <a href="Logout.php">wyloguj sie</a>';
 
             echo '<br>';
             echo '<a href=edit.php?loggedUserId=' . $_SESSION['loggedUserId'] . '>twoj profil</a>';
             echo '<br>';
-            echo '<a href="index.php">strona glowna</a>';
+            echo '<a href="Index.php">strona glowna</a>';
             echo '<br>';
         }
         $conn->close();
