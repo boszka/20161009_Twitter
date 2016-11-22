@@ -61,7 +61,7 @@
                         }
                     }
                     if ($wszystko_OK == true) {
-                        $updatedUserById->saveToDB($conn);
+                        $updwieżatedUserById->saveToDB($conn);
                         $_SESSION['new_password'] = 'hasło zostało zmienione';
                         header('Refresh:1; url=Edit.php?userId=' . $_SESSION['loggedUserId']);
                     }
