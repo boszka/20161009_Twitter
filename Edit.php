@@ -45,8 +45,7 @@
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updatedUserById = User::loadUserById($conn, $_SESSION['loggedUserId']);
-            switch ($_POST['submit']) {
-                case 'password':
+           
                     $wszystko_OK = true;
                     if (isset($_POST['password1']) && isset($_POST['password2'])) {
                         $password1 = $_POST['password1'];
@@ -64,9 +63,9 @@
                     if ($wszystko_OK == true) {
                         $updatedUserById->saveToDB($conn);
                         $_SESSION['new_password'] = 'hasło zostało zmienione';
+                        header('Refresh:1; url=Edit.php?userId=' . $_SESSION['loggedUserId']);
                     }
-                    break;
-            }
+            
         }
 
 
