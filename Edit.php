@@ -53,15 +53,15 @@
                         if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
                             $updatedUserById->setPassword($password1);
                         } else if (strlen($password1) < 6 || strlen($password1) > 16) {
-                            $_SESSION['e_password'] = "hasło musi posiadać od 6 do 16 znaków";
+                            $e_password = "hasło musi posiadać od 6 do 16 znaków";
                             $wszystko_OK = false;
                         } else {
-                            $_SESSION['e_password'] = "hasła różnią się";
+                            $e_password = "hasła różnią się";
                             $wszystko_OK = false;
                         }
                     }
                     if ($wszystko_OK == true) {
-                        $updwieżatedUserById->saveToDB($conn);
+                        $updatedUserById->saveToDB($conn);
                         $_SESSION['new_password'] = 'hasło zostało zmienione';
                         header('Refresh:1; url=Edit.php?userId=' . $_SESSION['loggedUserId']);
                     }
@@ -98,9 +98,9 @@
             <button type="submit" name="submit" value="password">Zapisz zmiany</button>
 
             <?php
-            if (isset($_SESSION['e_password'])) {
-                echo '<div>' . $_SESSION['e_password'] . '</div>';
-                unset($_SESSION['e_password']);
+            if (isset($e_password)) {
+                echo '<div>' . $e_password . '</div>';
+                unset($e_password);
             }
             if (isset($_SESSION['new_password'])) {
                 echo '<div>' . $_SESSION['new_password'] . '</div>';
