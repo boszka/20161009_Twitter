@@ -45,27 +45,26 @@
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updatedUserById = User::loadUserById($conn, $_SESSION['loggedUserId']);
-           
-                    $wszystko_OK = true;
-                    if (isset($_POST['password1']) && isset($_POST['password2'])) {
-                        $password1 = $_POST['password1'];
-                        $password2 = $_POST['password2'];
-                        if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
-                            $updatedUserById->setPassword($password1);
-                        } else if (strlen($password1) < 6 || strlen($password1) > 16) {
-                            $e_password = "hasło musi posiadać od 6 do 16 znaków";
-                            $wszystko_OK = false;
-                        } else {
-                            $e_password = "hasła różnią się";
-                            $wszystko_OK = false;
-                        }
-                    }
-                    if ($wszystko_OK == true) {
-                        $updatedUserById->saveToDB($conn);
-                        $_SESSION['new_password'] = 'hasło zostało zmienione';
-                        header('Refresh:1; url=Edit.php?userId=' . $_SESSION['loggedUserId']);
-                    }
-            
+
+            $wszystko_OK = true;
+            if (isset($_POST['password1']) && isset($_POST['password2'])) {
+                $password1 = $_POST['password1'];
+                $password2 = $_POST['password2'];
+                if (strlen($password1) >= 8 && strlen($password1) <= 20 && $password1 === $password2) {
+                    $updatedUserById->setPassword($password1);
+                } else if (strlen($password1) < 6 || strlen($password1) > 16) {
+                    $e_password = "hasło musi posiadać od 6 do 16 znaków";
+                    $wszystko_OK = false;
+                } else {
+                    $e_password = "hasła różnią się";
+                    $wszystko_OK = false;
+                }
+            }
+            if ($wszystko_OK == true) {
+                $updatedUserById->saveToDB($conn);
+                $_SESSION['new_password'] = 'hasło zostało zmienione';
+                header('Refresh:1; url=Edit.php?userId=' . $_SESSION['loggedUserId']);
+            }
         }
 
 
